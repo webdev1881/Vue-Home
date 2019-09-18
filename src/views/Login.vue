@@ -42,7 +42,7 @@ export default {
   name: 'login',
   methods: {
     onSubmit() {
-      console.log( this );
+      console.log( this.minLength );
     }
   } 
 }
