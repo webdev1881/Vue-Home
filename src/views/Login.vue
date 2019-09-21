@@ -17,7 +17,7 @@
               :class = " { invalid: ($v.user.email.$dirty && !$v.user.email.required) || ($v.user.email.$dirty && !$v.user.email.email) } "
                />          
             <div v-if=" $v.user.email.$error" class="invalid-feedback">
-              <span v-if="$v.user.email.$dirty && !$v.user.email.required">Email не должен быть пустым</span>
+              <span v-if="$v.user.email.$dirty && !$v.user.email.required">Email не должен быть пустым ++</span>
               <span v-if="!$v.user.email.email">Email не верный</span>
             </div>
             <label for="email">Email</label>
