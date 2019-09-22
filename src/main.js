@@ -6,9 +6,12 @@ import './registerServiceWorker'
 import Vuelidate from 'vuelidate';
 
 import  "materialize-css/dist/js/materialize.min"
+
 import dateFilter from './filters/date.filter'
+import messagePlugin from './utils/message.plugin'
 
 Vue.use(Vuelidate);
+Vue.use(messagePlugin);
 
 Vue.filter('date', dateFilter)
 

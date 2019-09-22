@@ -65,7 +65,7 @@
 <script>
 
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators"
-import { log } from 'util';
+import  messages from "../utils/messages"
 
 export default {
   name: 'login',
@@ -84,12 +84,16 @@ export default {
   validations: {
     user: {
       email: { required, email },
-      password: { required, minLength: minLength( 4 ) },
+      password: { required, minLength: minLength( 1 ) },
     }
+  },
+  mounted() {
+    let msg = this.$route.query.message
+    msg ? this.$message(messages[msg]) : null;
   },
   methods: {
     test() {
-    //  console.log( this.user )
+    
     },
     onSubmit() {
       if (this.$v.$invalid) {
@@ -101,6 +105,8 @@ export default {
         password: this.user.password
       }
       console.log( formData )
+
+      this.$router.push('/')
 
     }
   } 
