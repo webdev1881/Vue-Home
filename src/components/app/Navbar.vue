@@ -35,24 +35,24 @@
     data: () => ({
       date: new Date(),
       interval: null,
+      dropdown: null
     }),
 
     methods: {
-      logout() {
-        console.log('logout');
+      async logout() {
+        await this.$store.dispatch('logout')
         this.$router.push('/login?message=logout') 
       }
     },
 
     mounted() {
       this.interval =  interval(1000).subscribe( () => this.date = new Date()  )         
-      M.Dropdown.init(this.$refs.drop, {constrainWidth: true})     
+      this.dropdown = M.Dropdown.init(this.$refs.drop, {constrainWidth: true})     
     },
 
     beforeDestroy() {
-      console.log('destr');
-      this.interval.unsubscribe();
-      
+    //  this.interval.unsubscribe();
+    //  this.dropdown.destroy() 
     }
   }
 </script>

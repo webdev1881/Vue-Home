@@ -1,58 +1,3 @@
-  <!-- <form class="card auth-card">
-    <div class="card-content">
-      <span class="card-title">Домашняя бухгалтерия</span>
-      <div class="input-field">
-        <input
-            id="email"
-            type="text"
-        >
-        <label for="email">Email</label>
-        <small class="helper-text invalid">Email</small>
-      </div>
-      <div class="input-field">
-        <input
-            id="password"
-            type="password"
-            class="validate"
-        >
-        <label for="password">Пароль</label>
-        <small class="helper-text invalid">Password</small>
-      </div>
-      <div class="input-field">
-        <input
-            id="name"
-            type="text"
-            class="validate"
-        >
-        <label for="name">Имя</label>
-        <small class="helper-text invalid">Name</small>
-      </div>
-      <p>
-        <label>
-          <input type="checkbox" />
-          <span>С правилами согласен</span>
-        </label>
-      </p>
-    </div>
-    <div class="card-action">
-      <div>
-        <button
-            class="btn waves-effect waves-light auth-submit"
-            type="submit"
-        >
-          Зарегистрироваться
-          <i class="material-icons right">send</i>
-        </button>
-      </div>
-
-      <p class="center">
-        Уже есть аккаунт?
-        <a href="/">Войти!</a>
-      </p>
-    </div>
-  </form> -->
-
-
 <template>
   <div class="login" @click="test" >
     <div class="title">Регистрация</div>
@@ -129,7 +74,7 @@
           </div>
         </div>
 
-        <button class="btn 12-columns waves-effect waves-light" type="submit" name="action">
+        <button :disabled="isFormEnable"  class="btn 12-columns waves-effect waves-light" type="submit" name="action">
           Зарегистрироваться
           <i class="material-icons right">send</i>
         </button>
@@ -170,23 +115,36 @@ export default {
       repeatPassword: { sameAsPassword: sameAs('password') }
     }
   },
+  computed: {
+    isFormEnable: function() {
+      if (!this.$v.$invalid) {
+      return  false
+      }
+      return true
+    }
+  },
   methods: {
     test() {
     //  console.log( this )
     },
-    onSubmit() {
+    async onSubmit() {
       if (this.$v.$invalid) {
         this.$v.$touch();
         return;
       }
       const formData = {
         email: this.user.email,
-        name: this.user.name,
         password: this.user.password,
+        name: this.user.name,       
       }
-      console.log( formData )
 
-      this.$router.push('/')
+
+      try {
+        await this.$store.dispatch( 'register', formData );
+        this.$router.push('/');
+      } catch (e) {
+        console.log(e)
+      }
 
     }
   } 

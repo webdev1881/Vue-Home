@@ -46,7 +46,7 @@
           </div>
         </div>
 
-        <button class="btn 12-columns waves-effect waves-light" type="submit" name="action">
+        <button :disabled="isFormEnable"  class="btn 12-columns waves-effect waves-light" type="submit" name="action">
           ВОЙТИ
           <i class="material-icons right">send</i>
         </button>
@@ -67,6 +67,7 @@
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators"
 import  messages from "../utils/messages"
 
+
 export default {
   name: 'login',
   data() {
@@ -78,7 +79,7 @@ export default {
         password: "",
         confirmPassword: "",
         min: 12
-        }
+        },
     }
   },
   validations: {
@@ -91,11 +92,19 @@ export default {
     let msg = this.$route.query.message
     msg ? this.$message(messages[msg]) : null;
   },
+  computed: {
+    isFormEnable: function() {
+      if (!this.$v.$invalid) {
+      return  false
+      }
+      return true
+    }
+  },
   methods: {
     test() {
     
     },
-    onSubmit() {
+    async onSubmit() {
       if (this.$v.$invalid) {
         this.$v.$touch();
         return;
@@ -104,9 +113,18 @@ export default {
         email: this.user.email,
         password: this.user.password
       }
-      console.log( formData )
 
-      this.$router.push('/')
+      try {
+        await this.$store.dispatch( 'login', formData );
+        this.$router.push('/');
+      } catch (e) {
+        this.$message(messages[e.code])
+      }
+
+      
+
+      console.log( this.$store )
+
 
     }
   } 

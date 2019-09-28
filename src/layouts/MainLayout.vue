@@ -84,7 +84,7 @@ export default {
 
 .mob {
   position: absolute;
-  top: 60px;
+  top: 62px;
   bottom: 0;
   background-color: #e8ebf9; 
   z-index: 2;
