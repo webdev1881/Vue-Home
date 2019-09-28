@@ -51,8 +51,8 @@
     },
 
     beforeDestroy() {
-    //  this.interval.unsubscribe();
-    //  this.dropdown.destroy() 
+     this.interval.unsubscribe();
+     this.dropdown.destroy() 
     }
   }
 </script>
