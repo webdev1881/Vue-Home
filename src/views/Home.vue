@@ -1,8 +1,7 @@
 <template>
   <div>
-    <div class="page-title">
-      <h3>Счет</h3>
-
+    <div class="cur-title">
+      <div class="cur-name">Счет</div>
       <button class="btn waves-effect waves-light btn-small">
         <i class="material-icons">refresh</i>
       </button>
@@ -60,6 +59,17 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.cur-title {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  justify-content: space-between;
+  .cur-name {
+    font-size: 40px;
+    } 
+}
+
 
 
 

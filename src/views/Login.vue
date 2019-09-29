@@ -1,5 +1,5 @@
 <template>
-  <div class="login" @click="test" >
+  <div class="login" >
     <div class="title">Система учета</div>
     <div class="row">
       <form @submit.prevent='onSubmit' class="col s12">
@@ -50,15 +50,24 @@
           ВОЙТИ
           <i class="material-icons right">send</i>
         </button>
-
+        <button class="btn btn-prov google" @click.prevent="onGoogle" >
+         Google
+        <a href="#" class="fa fa-google"></a>
+        </button>
+        <button class="btn btn-prov twitter" @click.prevent="onGoogle" >
+         Twitter
+        <a href="#" class="fa fa-telegram"></a>
+        </button>
         <p class="no-account">
           Нет аккаунта?
           <router-link to="/register">Зарегистрироваться</router-link>
         </p>
 
       </form>
+      
     </div>
   </div>
+  
 </template>
 
 
@@ -89,8 +98,9 @@ export default {
     }
   },
   mounted() {
-    let msg = this.$route.query.message
-    msg ? this.$message(messages[msg]) : null;
+    let msgz = this.$route.query.message
+    msgz ? this.$message(messages[msgz]) : null;
+    
   },
   computed: {
     isFormEnable: function() {
@@ -101,9 +111,6 @@ export default {
     }
   },
   methods: {
-    test() {
-    
-    },
     async onSubmit() {
       if (this.$v.$invalid) {
         this.$v.$touch();
@@ -113,26 +120,28 @@ export default {
         email: this.user.email,
         password: this.user.password
       }
-
       try {
         await this.$store.dispatch( 'login', formData );
         this.$router.push('/');
-      } catch (e) {
-        this.$message(messages[e.code])
-      }
-
+      } catch (e) {}      
+    },
+    async onGoogle() {
+      console.log('555');
       
-
-      console.log( this.$store )
-
-
+      try {
+        await this.$store.dispatch( 'loginGoogle' );
+        this.$router.push('/');
+      } catch (e) {}  
     }
-  } 
+  },
+  beforeDestroy() {
+      this.msg = null;
+    }
 }
 
 </script>
 
-scr
+
 
 
 <style lang="scss">
@@ -141,9 +150,20 @@ scr
     min-width: 340px;
     background-color: #fff;
     font-size: 2em;
-    padding: 1em;  
+    padding: 1em;
     .btn {
       width: 100%;
+      margin-bottom: 5px;
+    }
+    .btn-prov {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      a {
+        font-size: 26px;
+        color: #1d5ab9;
+      }
     };
     .no-account {
       font-size: .6em;

@@ -10,12 +10,14 @@ import 'firebase/auth';
 import 'firebase/database'
 
 import  "materialize-css/dist/js/materialize.min"
+import  faUserSecret  from '@fortawesome/free-solid-svg-icons'
 
 import dateFilter from './filters/date.filter'
 import messagePlugin from './utils/message.plugin'
 
 Vue.use(Vuelidate);
 Vue.use(messagePlugin);
+Vue.use(faUserSecret);
 Vue.filter('date', dateFilter);
 //Vue.use(firebase);
 
@@ -31,17 +33,13 @@ firebase.initializeApp(
   }
 )
 
-let app;
-firebase.auth().onAuthStateChanged( function(){
-  if(!app) {
+
     new Vue({
-    router,
-    store,
-    render: h => h(App)
+      router,
+      store,
+      render: h => h(App)
     }).$mount('#app')
-  }
-  
-})
+
 
 
 

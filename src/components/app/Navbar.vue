@@ -10,7 +10,7 @@
     <a 
       class='dropdown-trigger drop'
       href='#' data-target='dropdown'
-      ref='drop' 
+      ref='dropd' 
       >
       Пользователь
       <i class="material-icons right">arrow_drop_down</i>
@@ -28,7 +28,6 @@
 
 <script>
 
-//  import * as moment from 'moment'
   import { interval } from 'rxjs'
 
   export default {
@@ -39,20 +38,22 @@
     }),
 
     methods: {
-      async logout() {
+      async logout() {       
         await this.$store.dispatch('logout')
         this.$router.push('/login?message=logout') 
       }
     },
 
     mounted() {
-      this.interval =  interval(1000).subscribe( () => this.date = new Date()  )         
-      this.dropdown = M.Dropdown.init(this.$refs.drop, {constrainWidth: true})     
+    this.interval =  interval(1000).subscribe( () => this.date = new Date()  )
+    this.dropdown = M.Dropdown.init(this.$refs.dropd, {constrainWidth: true})      
     },
 
     beforeDestroy() {
-     this.interval.unsubscribe();
-     this.dropdown.destroy() 
+      this.interval.unsubscribe();
+      if (this.dropdown && this.dropdown.destroy) {
+      this.dropdown.destroy()
+      }
     }
   }
 </script>
