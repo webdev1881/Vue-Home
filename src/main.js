@@ -10,16 +10,14 @@ import 'firebase/auth';
 import 'firebase/database'
 
 import  "materialize-css/dist/js/materialize.min"
-import  faUserSecret  from '@fortawesome/free-solid-svg-icons'
 
 import dateFilter from './filters/date.filter'
 import messagePlugin from './utils/message.plugin'
 
 Vue.use(Vuelidate);
 Vue.use(messagePlugin);
-Vue.use(faUserSecret);
 Vue.filter('date', dateFilter);
-//Vue.use(firebase);
+
 
 firebase.initializeApp(
   {
