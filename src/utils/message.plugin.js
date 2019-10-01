@@ -5,8 +5,6 @@ export default {
             M.toast({html: txt})           
         }
 
-
-
         
     }
 }

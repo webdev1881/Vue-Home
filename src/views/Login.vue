@@ -50,14 +50,11 @@
           ВОЙТИ
           <i class="material-icons right">send</i>
         </button>
-        <button class="btn btn-prov google" @click.prevent="onGoogle" >
-         Google
-        <a href="#" class="fa fa-google"></a>
-        </button>
-        <button class="btn btn-prov twitter" @click.prevent="onGoogle" >
-         Twitter
-        <a href="#" class="fa fa-telegram"></a>
-        </button>
+
+        <button class="btn btn-prov google" @click.prevent="onGoogle" ><a href="#" class="fa fa-google"></a><span>Sign in with Google</span></button>
+
+        <button class="btn btn-prov twitter" @click.prevent="onGoogle" ><a href="#" class="fa fa-telegram"></a></button>
+        
         <p class="no-account">
           Нет аккаунта?
           <router-link to="/register">Зарегистрироваться</router-link>
@@ -149,7 +146,7 @@ export default {
     width: 40%;
     min-width: 340px;
     background-color: #fff;
-    font-size: 2em;
+
     padding: 1em;
     .btn {
       width: 100%;
@@ -159,12 +156,23 @@ export default {
       width: 100%;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      span {
+        font-size: 16px;
+        margin-left: 20px;
+      }
       a {
         font-size: 26px;
-        color: #1d5ab9;
       }
     };
+    .google {
+      background-color: #c1d7e8;
+      a {
+        color: #002bff;
+      }
+      span {
+        color:black;
+      }
+    }
     .no-account {
       font-size: .6em;
     }
