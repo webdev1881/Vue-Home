@@ -123,13 +123,17 @@ export default {
       } catch (e) {}      
     },
     async onGoogle() {
-      console.log('555');
-      
       try {
         await this.$store.dispatch( 'loginGoogle' );
         this.$router.push('/');
       } catch (e) {}  
-    }
+    },
+    async onPhone() {
+      try {
+        await this.$store.dispatch( 'loginGoogle' );
+        this.$router.push('/');
+      } catch (e) {}  
+    },
   },
   beforeDestroy() {
       this.msg = null;
