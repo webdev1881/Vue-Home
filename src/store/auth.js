@@ -28,7 +28,6 @@ export default {
 
         async loginPhone({ dispatch, commit }, phNo) {
 
-
             window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
 
             const appVerifier = window.recaptchaVerifier;
