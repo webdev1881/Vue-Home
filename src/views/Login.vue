@@ -146,7 +146,6 @@ export default {
     },
     async onGoogle() {
       try {
-<<<<<<< HEAD
         await this.$store.dispatch("loginGoogle");
         this.$router.push("/");
       } catch (e) {}
@@ -163,18 +162,6 @@ export default {
         console.log(e);
       }
     }
-=======
-        await this.$store.dispatch( 'loginGoogle' );
-        this.$router.push('/');
-      } catch (e) {}  
-    },
-    async onPhone() {
-      try {
-        await this.$store.dispatch( 'loginGoogle' );
-        this.$router.push('/');
-      } catch (e) {}  
-    },
->>>>>>> f778c8c4c6d400ce069374f7ce39d605b6771163
   },
 
   beforeDestroy() {
