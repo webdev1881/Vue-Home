@@ -83,10 +83,14 @@
         </div>       
         <br />
         <button class="btn" @click="onPhone">Login</button>
+        <input type="text"  v-model="code" > <button @click="show" >code</button>
         <div id="recaptcha-container"></div>
       </div>
 
     </div>
+    <modal name="hello-world">
+      hello, world!
+    </modal>
   </div>
 </template>
 
@@ -109,6 +113,7 @@ export default {
       },
       phone: false,
       phNo: '',
+      code: '',
     };
   },
   validations: {
@@ -130,6 +135,10 @@ export default {
     // }
   },
   methods: {
+    show () {
+      console.log(this.$modal)
+      this.$modal.show('hello-world');
+    },
     async onSubmit() {
       if (this.$v.$invalid) {
         this.$v.$touch();
@@ -153,11 +162,17 @@ export default {
     togglePhone() {           
       this.phone = !this.phone;
     },
+    async onCode() {
+      try {
+      //  console.log(this.code);      
+        await this.$store.dispatch("getCode", this.code);
+      } catch (error) {}
+    },
     async onPhone() {
       this.phone = true;
       try {
         await this.$store.dispatch("loginPhone", this.phNo);
-        //  this.$router.push('/');
+        this.$router.push('/');
       } catch (e) {
         console.log(e);
       }

@@ -1,6 +1,5 @@
 import firebase from 'firebase/app';
 
-
 export default {
 
     actions: {
@@ -11,6 +10,7 @@ export default {
                 throw e
             }
         },
+
         async loginGoogle() {
             try {
                 var provider = await new firebase.auth.GoogleAuthProvider();
@@ -26,86 +26,34 @@ export default {
         },
 
 
-        async loginPhone({ dispatch, commit }, phNo) {
+        async loginPhone( phNo) {           
 
-            window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+            try {
+            let recaptchaVerifier = new firebase.auth.RecaptchaVerifier("recaptcha-container")
+            let appVerifier = recaptchaVerifier;
+            let phoneNumberString = '+380991516010';
+            //let verification = await  window.prompt('Enter verification code')
 
-            const appVerifier = window.recaptchaVerifier;
+            await firebase.auth().signInWithPhoneNumber(phoneNumberString, appVerifier)
+              .then( (confirmationResult) => {
 
-            const phoneNumberString = "+380991516010";
-
-            firebase.auth().signInWithPhoneNumber(phoneNumberString, appVerifier)
-                .then(confirmationResult => {
-                    console.log(recaptchaVerifier);
-                    
-                    
-                })
-                .then( appVerifier => {
-                    prompt('123');
-                } )
+                let verification =  window.prompt('Enter verification code')
+                 console.log(this)
+            
+               
                 
+                confirmationResult.confirm(verification)
 
-
-
-                // .then(confirmationResult => {
-                //     // SMS sent. Prompt user to type the code from the message, then sign the
-                //     // user in with confirmationResult.confirm(code).
-
-                //     let prompt = this.alertCtrl.create({
-                //         title: 'Enter the Confirmation code',
-                //         inputs: [{ name: 'confirmationCode', placeholder: 'Confirmation Code' }],
-                //         buttons: [
-                //             {
-                //                 text: 'Cancel',
-                //                 handler: data => { console.log('Cancel clicked'); }
-                //             },
-                //             {
-                //                 text: 'Send',
-                //                 handler: data => {
-                //                     confirmationResult.confirm(data.confirmationCode)
-                //                         .then(function (result) {
-                //                             // User signed in successfully.
-                //                             console.log(result.user);
-                //                             // ...
-                //                         }).catch(function (error) {
-                //                             // User couldn't sign in (bad verification code?)
-                //                             // ...
-                //                         });
-                //                 }
-                //             }
-                //         ]
-                //     });
-                //     prompt.present();
-                // })
-                // .catch(function (error) {
-                //     console.error("SMS not sent", error);
-                // });
-
-
-            // var code = getCodeFromUserInput();
-            // confirmationResult.confirm(code).then(function (result) {
-            //   // User signed in successfully.
-            //   var user = result.user;
-            //   // ...
-            // }).catch(function (error) {
-            //   // User couldn't sign in (bad verification code?)
-            //   // ...
-            // });
-
-
-
-
-
-
-            // firebase.auth().languageCode = 'it';
-            // window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
-            //     'size': 'invisible',
-            //     'callback': function(response) {
-            //       // reCAPTCHA solved, allow signInWithPhoneNumber.
-            //       onSignInSubmit();
-            //     }
-            // });
-            // window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+                
+              })
+              .catch((err) => {
+                console.log('sms not sent', err);
+                throw err
+              }); 
+            } catch (e) {
+                throw e
+            }
+                                
         },
 
         async logout() {
@@ -129,3 +77,136 @@ export default {
 
 
 }
+
+
+// let ob = {};
+
+
+// for(var k in source.days ) {
+
+//   let day = source.days[k]
+
+//   let concat = `${day.start}-${day.end}`
+
+//   ob[concat] = ([(ob[concat] || '')] +  [k] + ',');
+
+
+
+// }
+
+// console.log( ob )
+
+
+
+// for(var i in ob) {
+//   let weekDay = ob[i].split(',');
+  
+//   console.log( weekDay )
+
+// };
+
+
+
+// const source = {
+//     order: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+//     days: {
+//       Monday: {
+//         start: 10,
+//         end: 19.5
+//       },
+//       Tuesday: {
+//         start: 10.75,
+//         end: 23.5
+//       },
+//       Wednesday: {
+//         start: 10.75,
+//         end: 23.5
+//       },
+//       Thursday: {
+//         start: 10.75,
+//         end: 23.5
+//       },
+//       Saturday: {
+//         start: 9,
+//         end: 18
+//       },
+//       Sunday: {
+//         start: 9,
+//         end: 18
+//       }
+//     }
+//   }
+  
+//   const source2 = {
+//     order: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+//     days: {
+//       Monday: {
+//         start: 9,
+//         end: 18.35
+//       },
+//       Tuesday: {
+//         start: 10,
+//         end: 19.2
+//       },
+//       Wednesday: {
+//         start: 9,
+//         end: 18.35
+//       },
+//       Thursday: {
+//         start: 10,
+//         end: 19.2
+//       },
+//       Saturday: {
+//         start: 10,
+//         end: 19.2
+//       },
+//       Sunday: {
+//         start: 10,
+//         end: 19.2
+//       }
+//     }
+//   }
+  
+//   const source3 = {
+//     order: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+//     days: {
+//       Monday: {
+//         start: 7.5,
+//         end: 18.5
+//       },
+//       Tuesday: {
+//         start: 7.5,
+//         end: 18.5
+//       },
+//       Saturday: {
+//         start: 7.5,
+//         end: 18.5
+//       },
+//       Sunday: {
+//         start: 9,
+//         end: 18
+//       }
+//     }
+//   };
+
+
+
+  
+// <!-- Period 1
+// Mon: 10:00 AM - 7:30 PM
+// Tue - Thu: 10:45 AM - 11:30 PM
+// Sat - Sun: 9:00 AM - 6:00 PM -->
+
+// <!-- Period 2
+// Mon: 9:00 AM - 6:21 PM
+// Tue: 10:00 AM - 7:11 PM
+// Wed: 9:00 AM - 6:21 PM
+// Thu: 10:00 AM - 7:11 PM
+// Sat - Sun: 10:00 AM - 7:11 PM -->
+
+
+// <!-- Period 3
+// Mon - Tue: 7:30 AM - 6:30 PM
+// Sat: 7:30 AM - 6:30 PM
+// Sun: 9:00 AM - 6:00 PM -->
+

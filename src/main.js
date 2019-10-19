@@ -14,9 +14,14 @@ import  "materialize-css/dist/js/materialize.min"
 import dateFilter from './filters/date.filter'
 import messagePlugin from './utils/message.plugin'
 
+import VModal from 'vue-js-modal'
+
+Vue.use(VModal)
 Vue.use(Vuelidate);
 Vue.use(messagePlugin);
 Vue.filter('date', dateFilter);
+
+
 
 
 firebase.initializeApp(
@@ -39,7 +44,7 @@ firebase.initializeApp(
     }).$mount('#app')
 
 
-
+    VModal.rootInstance = app;
 
 Vue.config.productionTip = false
 
