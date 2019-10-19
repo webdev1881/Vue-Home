@@ -16,11 +16,13 @@ import messagePlugin from './utils/message.plugin'
 
 import VModal from 'vue-js-modal'
 
+import Loader from '@/components/app/Loader'
+
 Vue.use(VModal)
 Vue.use(Vuelidate);
 Vue.use(messagePlugin);
 Vue.filter('date', dateFilter);
-
+Vue.component('Loader', Loader);
 
 
 

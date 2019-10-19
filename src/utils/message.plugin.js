@@ -5,6 +5,10 @@ export default {
             M.toast({html: txt})           
         }
 
+        Vue.prototype.$error = function(txt) {
+            M.toast({html: `ОШИБКА:  ${txt}`})           
+        }
+
         
     }
 }

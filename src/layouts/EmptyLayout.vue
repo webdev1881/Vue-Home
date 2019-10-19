@@ -4,6 +4,25 @@
   </div>
 </template>
 
+<script>
+
+import messages from '@/utils/messages'
+
+export default {
+  computed: {
+    error() {
+      return this.$store.getters.error
+    }
+  },
+  watch: {
+    error( erFB ) {
+      console.log( erFB )
+      this.$error( messages[erFB.code] )
+      }
+    }
+  }
+</script>
+
 
 <style lang="scss">
 .gray {

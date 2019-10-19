@@ -157,7 +157,9 @@ export default {
       try {
         await this.$store.dispatch("loginGoogle");
         this.$router.push("/");
-      } catch (e) {}
+      } catch (e) {
+        console.log(e)
+      }
     },
     togglePhone() {           
       this.phone = !this.phone;

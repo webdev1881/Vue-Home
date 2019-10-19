@@ -7,6 +7,7 @@ export default {
             try {
                 await firebase.auth().signInWithEmailAndPassword(email, password)
             } catch (e) {
+                commit( 'setError', e )
                 throw e
             }
         },
@@ -18,8 +19,14 @@ export default {
                 provider.addScope('email');
                 await firebase.auth().signInWithPopup(provider).then(function (result) {
                     var token = result.credential.accessToken;
-                    var user = result.user;
+                    var user = result.user
+                    firebase.database().ref(`/users/${user.uid}`).once('value').then(function(snapshot) {
+                        if(!snapshot.val()){
+                            firebase.database().ref(`/users/${user.uid}/info`).set({ name: user.email, bill: 0})
+                        }
+                    })        
                 });
+                
             } catch (e) {
                 throw e
             }
@@ -62,11 +69,17 @@ export default {
 
         async register({ dispatch }, { email, password, name }) {
             try {
-                firebase.auth().createUserWithEmailAndPassword(email, password)
+                await firebase.auth().createUserWithEmailAndPassword(email, password)
+                const id = await dispatch('getId')
+                await firebase.database().ref(`/users/${id}/info`).set({ name, bill: 0})
             } catch (e) {
                 throw e
             }
+        },
 
+        getId() {
+            const user = firebase.auth().currentUser
+            return user ? user.uid : null
         }
     }
 
