@@ -1,5 +1,6 @@
 <template>
-  <div>
+<transition name="component-fade" mode="out-in">
+    <div>
     <div class="page-title">
       <h3>Категории</h3>
     </div>
@@ -75,5 +76,6 @@
       </div>
     </section>
   </div>
-</template>
+</transition> 
 
+</template>

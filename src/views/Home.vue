@@ -29,7 +29,7 @@ import HomeCur from "@/components/HomeCur";
 export default {
   name: "home",
   data: () => ({
-    isLoading: true
+    isLoading: false
   }),
   components: { HomeBill, HomeCur }
 };

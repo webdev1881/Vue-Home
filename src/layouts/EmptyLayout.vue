@@ -16,8 +16,9 @@ export default {
   },
   watch: {
     error( erFB ) {
-      console.log( erFB )
+      console.log( erFB.code )
       this.$error( messages[erFB.code] )
+    //  debugger
       }
     }
   }
@@ -32,5 +33,8 @@ export default {
   justify-content: center;
   align-items: center;
   background-color: #58799a;
+}
+.error-msg {
+  background-color: red !important;
 }
 </style>
