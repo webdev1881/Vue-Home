@@ -1,5 +1,7 @@
 module.exports = {
+  publicPath: '',
   css: {
-    sourceMap: true
+    sourceMap: true,
+    modules: true
   }
 }

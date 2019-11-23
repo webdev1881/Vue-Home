@@ -12,7 +12,7 @@
       href='#' data-target='dropdown'
       ref='dropd' 
       >
-      Пользователь
+      {{name}}
       <i class="material-icons right">arrow_drop_down</i>
     </a>
 
@@ -43,10 +43,14 @@
         this.$router.push('/login?message=logout') 
       }
     },
-
+    computed: {
+      name() {
+        return this.$store.getters.info.name
+      }
+    },
     mounted() {
-    this.interval =  interval(1000).subscribe( () => this.date = new Date()  )
-    this.dropdown = M.Dropdown.init(this.$refs.dropd, {constrainWidth: true})      
+      this.interval =  interval(1000).subscribe( () => this.date = new Date()  )
+      this.dropdown = M.Dropdown.init(this.$refs.dropd, {constrainWidth: true})      
     },
 
     beforeDestroy() {
@@ -63,6 +67,7 @@
 
   .header {
     width: 100%;
+    min-width: 520px;
     background-color: #609ca9;
     justify-content: space-between;
     height: 60px;
@@ -77,7 +82,7 @@
       color: black;
       span {
         font-size: 18px;
-        margin-left: 85px;;
+        margin-left: 15px;;
       }
     }
 

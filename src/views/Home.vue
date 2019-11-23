@@ -3,7 +3,7 @@
     <div class="cur-title">
       <div class="cur-name">Счет</div>
       <button class="btn waves-effect waves-light btn-small">
-        <i class="material-icons">refresh</i>
+        <i class="material-icons" @click="refresh" >refresh</i>
       </button>
     </div>
 
@@ -14,8 +14,8 @@
 
     
     <div v-else class="row">
-      <HomeBill />
-      <HomeCur />
+      <HomeBill :rates='cur' />
+      <HomeCur :rates='cur' />
     </div>
 
 
@@ -26,11 +26,32 @@
 import HomeBill from "@/components/HomeBill";
 import HomeCur from "@/components/HomeCur";
 
+
+
 export default {
   name: "home",
   data: () => ({
-    isLoading: false
+    USD: '',
+    EUR: '',
+    isLoading: true,
+    cur: {},
+    currencies: null,
   }),
+  async mounted() {
+    this.currencies = await this.$store.dispatch('fetchCur')
+    this.cur = {
+      USD: this.currencies[27].rate.toFixed(2),
+      EUR: this.currencies[34].rate.toFixed(2)
+    }
+    this.isLoading = false
+  },
+  methods: {
+    async refresh() {
+      this.isLoading = true
+      this.currencies = await this.$store.dispatch('fetchCur')    
+      this.isLoading = false
+    }
+  },
   components: { HomeBill, HomeCur }
 };
 </script>

@@ -36,16 +36,16 @@ export default {
         async loginPhone( phNo) {           
 
             try {
-            let recaptchaVerifier = new firebase.auth.RecaptchaVerifier("recaptcha-container")
-            let appVerifier = recaptchaVerifier;
-            let phoneNumberString = '+380991516010';
-            //let verification = await  window.prompt('Enter verification code')
+                let recaptchaVerifier = new firebase.auth.RecaptchaVerifier("recaptcha-container")
+                let appVerifier = recaptchaVerifier;
+                let phoneNumberString = '+380991516010';
+                //let verification = await  window.prompt('Enter verification code')
 
-            await firebase.auth().signInWithPhoneNumber(phoneNumberString, appVerifier)
-              .then( (confirmationResult) => {
+                await firebase.auth().signInWithPhoneNumber(phoneNumberString, appVerifier)
+                .then( (confirmationResult) => {
 
-                let verification =  window.prompt('Enter verification code')
-                 console.log(this)
+                    let verification =  window.prompt('Enter verification code')
+                    console.log(this)
             
                
                 
@@ -63,8 +63,9 @@ export default {
                                 
         },
 
-        async logout() {
+        async logout({commit}) {
             await firebase.auth().signOut()
+            commit('clearInfo')
         },
 
         async register({ dispatch }, { email, password, name }) {

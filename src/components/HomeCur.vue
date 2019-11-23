@@ -16,9 +16,14 @@
 
           <tbody>
             <tr>
-              <td>руб</td>
-              <td>12121</td>
-              <td>12.12.12</td>
+              <td>USD</td>
+              <td> {{rates.USD}} </td>
+              <td>{{date | date}}</td>
+            </tr>
+            <tr>
+              <td>EUR</td>
+              <td> {{rates.EUR}} </td>
+              <td>{{date | date}}</td>
             </tr>
           </tbody>
         </table>
@@ -26,6 +31,19 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: ['rates'],
+  data: () => ({
+    date: new Date(),
+  }),
+  mounted() {
+    
+  }
+}
+
+</script>
 
 
 <style lang="scss">

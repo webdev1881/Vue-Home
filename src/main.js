@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-//import './registerServiceWorker'
+import './registerServiceWorker'
 import Vuelidate from 'vuelidate';
 
 import firebase from 'firebase/app';
@@ -12,6 +12,8 @@ import 'firebase/database'
 import  "materialize-css/dist/js/materialize.min"
 
 import dateFilter from './filters/date.filter'
+import curFilter from './filters/cur.filter'
+
 import messagePlugin from './utils/message.plugin'
 
 import VModal from 'vue-js-modal'
@@ -22,6 +24,7 @@ Vue.use(VModal)
 Vue.use(Vuelidate);
 Vue.use(messagePlugin);
 Vue.filter('date', dateFilter);
+Vue.filter('cur', curFilter);
 Vue.component('Loader', Loader);
 
 

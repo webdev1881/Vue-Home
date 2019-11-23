@@ -190,7 +190,7 @@ export default {
 
 
 
-<style lang="scss">
+<style lang="scss" scope>
 .login {
   width: 40%;
   min-width: 340px;

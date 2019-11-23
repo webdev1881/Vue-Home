@@ -4,18 +4,54 @@
       <div class="card light-blue bill-card">
         <div class="card-content white-text">
           <span class="card-title">Счет в валюте</span>
-          <p class="currency-line">
-            <span>12.0 Р</span>
+
+          <p
+            v-for="cur of curencies"
+            :key="cur"
+            class="currency-line">
+            <span> {{ getCur(cur) | cur(cur)   }} <hr> </span>
+            
           </p>
+
         </div>
       </div>
     </div>
 
 </template>
 
-<style lang="scss">
-    .bill {
-    //    background-color: red;
 
+<script>
+export default {
+  props: ['rates'],
+  data: () => ({
+  //  bill: '',
+    curencies: ["UAH", "USD", "EUR"]
+  }),
+  computed: {
+    base() {
+      return this.$store.getters.info.bill
+    }
+  },
+  methods: {
+    getCur(currency) {
+      return Math.floor(this.base/(this.rates[currency] || 1 ) )
+    }
+  },
+  mounted() {
+    //this.bill = this.$store.getters.info.bill
+    // this.curencies = [
+    //   +this.bill,
+    //   Math.floor(+this.bill/+this.rates.USD),
+    //   Math.floor(+this.bill/+this.rates.EUR),
+    // ]
+    // Object.keys(this.curencies)
+    // console.log( this.rates )
+  }
+}
+</script>
+
+<style lang="scss">
+    .currency-line {
+      padding-top: 15px;
     }
 </style>
