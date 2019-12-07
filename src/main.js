@@ -41,12 +41,20 @@ firebase.initializeApp(
   }
 )
 
+let app
 
+firebase.auth().onAuthStateChanged( () => {
+  if(!app) {
     new Vue({
-      router,
-      store,
-      render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
     }).$mount('#app')
+  }
+  
+} )
+
+
 
 
     VModal.rootInstance = app;
