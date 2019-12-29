@@ -45,9 +45,7 @@ export default {
     },
 
     deleteCategory(id) {
-    //  console.log(this.categories);
-      const idx = this.categories.findIndex(c => c.id === id)
-    //  console.log(idx);      
+      const idx = this.categories.findIndex(c => c.id === id)     
       this.categories.splice(idx, 1);
       this.updateCount--
     },
