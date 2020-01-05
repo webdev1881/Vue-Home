@@ -5,18 +5,11 @@ import info from './info'
 import category from './category'
 import record from './record'
 
-Vue.use(Vuex);
-
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     error: null
-  },
-  actions: {
-    async fetchCur(  ) {   
-      const res = await fetch(`https://old.bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json`)      
-      return await res.json()
-    }
   },
   mutations: {
     setError(state, error) {
@@ -26,11 +19,17 @@ export default new Vuex.Store({
       state.error = null
     }
   },
-
+  actions: {
+    async fetchCurrency() {
+      const key = process.env.VUE_APP_FIXER
+      const res = await fetch(`http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,RUB`)
+      return await res.json()
+    }
+  },
   getters: {
     error: s => s.error
   },
-
-
-  modules: { auth, info, category, record }
+  modules: {
+    auth, info, category, record
+  }
 })

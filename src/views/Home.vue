@@ -40,8 +40,8 @@ export default {
   async mounted() {
     this.currencies = await this.$store.dispatch('fetchCur')
     this.cur = {
-      USD: this.currencies[27].rate.toFixed(2),
-      EUR: this.currencies[34].rate.toFixed(2)
+      USD: this.currencies[26].rate.toFixed(2),
+      EUR: this.currencies[33].rate.toFixed(2)
     }
     this.isLoading = false
   },
@@ -73,5 +73,11 @@ export default {
     display: flex;
     justify-content: center;
     padding-top: 40px;
+  }
+       
+  @media screen and (max-width: 833px) {
+    .bill {
+      width: 100%;
+    } 
   }
 </style>

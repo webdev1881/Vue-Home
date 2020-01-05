@@ -1,5 +1,5 @@
 <template>
-  <div class="login" @click="test" >
+  <div class="login" >
     <div class="title">Регистрация</div>
     <div class="row">
       <form @submit.prevent='onSubmit' class="col s12">
@@ -124,9 +124,6 @@ export default {
     }
   },
   methods: {
-    test() {
-    //  console.log( this )
-    },
     async onSubmit() {
       if (this.$v.$invalid) {
         this.$v.$touch();

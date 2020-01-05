@@ -35,24 +35,24 @@
 
         <div class="input-field">
           <input
-              id="descript"
-              type="text"
-              v-model="descript"
+              id="limit"
+              type="number"
+              v-model.number="limit"
+              :class="{invalid: $v.limit.$dirty && !$v.limit.minValue}"
           >
-          <label for="descript">Описание</label>
-
+          <label for="limit">Лимит</label>
+          <span 
+            v-if="$v.limit.$dirty && !$v.limit.minValue"
+            class="helper-text invalid"
+          >
+            Минимальная значение {{$v.limit.$params.minValue.min}}
+          </span>
         </div>
 
-        <button class="btn waves-effect waves-light upd" type="submit">
+        <button class="btn waves-effect waves-light" type="submit">
           Обновить
           <i class="material-icons right">send</i>
         </button>
-
-        <button @click.prevent="deleteCat" class="btn waves-effect waves-light del" type="submit">
-          Удалить
-          <i class="material-icons right">send</i>
-        </button>
-
       </form>
     </div>
   </div>
@@ -71,60 +71,48 @@ export default {
   data: () => ({
     select: null,
     title: '',
-    descript: '',
+    limit: 100,
     current: null
   }),
   validations: {
     title: {required},
+    limit: {minValue: minValue(100)}
   },
   watch: {
     current(catId) {
-      const {title, descrip} = this.categories.find(c => c.id === catId)
+      const {title, limit} = this.categories.find(c => c.id === catId)
       this.title = title
-      this.descrip = descrip
+      this.limit = limit
     }
   },
   created() {
-    const {id, title, descrip} = this.categories[0]
+    const {id, title, limit} = this.categories[0]
     this.current = id
     this.title = title
-    this.descrip = descrip
+    this.limit = limit
   },
   methods: {
-    async submitHandler() {     
+    async submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
       }
+
       try {
         const categoryData = {
           id: this.current,
           title: this.title,
-          descript: this.descript || ''
+          limit: this.limit
         }
-         console.log(categoryData);
         await this.$store.dispatch('updateCategory', categoryData)
         this.$message('Категория упешно обновлена')
         this.$emit('updated', categoryData)
-      } catch (e) {
-        console.log(e);       
-      }
-    },
-    async deleteCat() {     
-
-      try {
-        let id = this.current          
-        await this.$store.dispatch('deleteCategory', id)
-        this.$message('Категория упешно удалена')
-        this.$emit('delete', id)
-      } catch (e) {
-        console.log(e);       
-      }
+      } catch (e) {}
     }
   },
-  async mounted() {
+  mounted() {
     this.select = M.FormSelect.init(this.$refs.select)
-     await M.updateTextFields()
+    M.updateTextFields()
   },
   destroyed() {
     if (this.select && this.select.destroy) {
@@ -133,19 +121,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-
-  .input-field {
-    margin: 0;
-  }
-  .upd {
-    margin-right: 20px;
-  }
-  .btn {
-    margin-bottom: 10px;
-    min-width: 145px;
-  }
-
-
-</style>

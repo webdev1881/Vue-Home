@@ -50,7 +50,10 @@
     },
     mounted() {
       this.interval =  interval(1000).subscribe( () => this.date = new Date()  )
-      this.dropdown = M.Dropdown.init(this.$refs.dropd, {constrainWidth: true})      
+      setTimeout( () => {
+        this.dropdown = M.Dropdown.init(this.$refs.dropd, {constrainWidth: true}) 
+      },100 )
+           
     },
 
     beforeDestroy() {

@@ -10,7 +10,7 @@
 
     <form class="form" v-else @submit.prevent="handleSubmit">
       <div class="input-field" >
-        <select ref="select" v-model="category" >
+        <select ref="select" v-model="category">
           <option
             v-for="c in categories"
             :key="c.id"
@@ -51,8 +51,7 @@
             id="amount"
             type="number"
             v-model.number="amount"
-            ref="amount"
-            :class="{invalid: $v.amount.$dirty && !$v.amount.minValue && $v.amount.required}"
+            :class="{invalid: $v.amount.$dirty && !$v.amount.minValue}"
         >
         <label for="amount">Сумма</label>
         <span 
@@ -60,7 +59,13 @@
             class="helper-text invalid"
           >
             Минимальная значение {{$v.amount.$params.minValue.min}}
-          </span>
+        </span>
+        <span 
+            v-if="$v.amount.$dirty && !$v.amount.required"
+            class="helper-text invalid"
+          >
+            Введите сумму 
+        </span>
       </div>
 
       <div class="input-field">
@@ -68,8 +73,15 @@
             id="description"
             type="text"
             v-model="description"
+            :class="{invalid: $v.description.$dirty && !$v.description.required}"
         >
-        <label for="description">Описание (не обязательно)</label>
+        <label for="description">Описание</label>
+        <span 
+            v-if="$v.description.$dirty && !$v.description.required"
+            class="helper-text invalid"
+          >
+            Введите сумму 
+          </span>
       </div>
 
       <button class="btn waves-effect waves-light" type="submit">
@@ -91,11 +103,12 @@ export default {
     categories: [],
     category: null,
     type: 'outcome',
-    amount: null,
+    amount: 1,
     description: ''
   }),
   validations: {
-    amount: {minValue: minValue(1), required},
+    amount: {minValue: minValue(1)},
+    description: {required}
   },
   async mounted() {
     this.categories = await this.$store.dispatch('fetchCategories')
@@ -104,18 +117,12 @@ export default {
     if (this.categories.length) {
       this.category = this.categories[0].id
     }
-      setTimeout( () => {
-        this.select =  M.FormSelect.init(this.$refs.select)
-        M.updateTextFields()
-        this.$refs.select.focus()
-      },0 )
 
-      
-      
-      
-      
+    setTimeout(() => {
+      this.select = M.FormSelect.init(this.$refs.select)
+      M.updateTextFields()
+    }, 0)
   },
-
   computed: {
     ...mapGetters(['info']),
     canCreateRecord() {

@@ -14,7 +14,6 @@
               :class="{invalid: $v.title.$dirty && !$v.title.required}"
           >
           <label for="name">Название</label>
-          
           <span 
             v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid"
@@ -25,13 +24,19 @@
 
         <div class="input-field">
           <input
-              id="descript"
-              type="text"
-              v-model="descript"
+              id="limit"
+              type="number"
+              v-model.number="limit"
+              :class="{invalid: $v.limit.$dirty && !$v.limit.minValue}"
           >
-          <label for="descript">Описание</label>
+          <label for="limit">Лимит</label>
+          <span 
+            v-if="$v.limit.$dirty && !$v.limit.minValue"
+            class="helper-text invalid"
+          >
+            Минимальная значение {{$v.limit.$params.minValue.min}}
+          </span>
         </div>
-
 
         <button class="btn waves-effect waves-light" type="submit">
           Создать
@@ -48,16 +53,17 @@ import {required, minValue} from 'vuelidate/lib/validators'
 export default {
   data: () => ({
     title: '',
-    descript: ''
+    limit: 100
   }),
   validations: {
     title: {required},
+    limit: {minValue: minValue(100)}
   },
   mounted() {
     M.updateTextFields()
   },
   methods: {
-    async submitHandler() {        
+    async submitHandler() {
       if (this.$v.$invalid) {
         this.$v.$touch()
         return
@@ -66,10 +72,10 @@ export default {
       try {
         const category = await this.$store.dispatch('createCategory', {
           title: this.title,
-          descript: this.descript
-        })        
+          limit: this.limit
+        })
         this.title = ''
-        this.descript = ''
+        this.limit = 100
         this.$v.$reset()
         this.$message('Категория была создана')
         this.$emit('created', category)
@@ -78,7 +84,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" >
-
-</style>
