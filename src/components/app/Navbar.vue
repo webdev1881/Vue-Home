@@ -52,7 +52,7 @@
       this.interval =  interval(1000).subscribe( () => this.date = new Date()  )
       setTimeout( () => {
         this.dropdown = M.Dropdown.init(this.$refs.dropd, {constrainWidth: true}) 
-      },100 )
+      },0 )
            
     },
 
@@ -70,7 +70,6 @@
 
   .header {
     width: 100%;
-    min-width: 520px;
     background-color: #609ca9;
     justify-content: space-between;
     height: 60px;

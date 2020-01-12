@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: '',
+  publicPath: 'dist',
   css: {
     sourceMap: true,
     modules: true
