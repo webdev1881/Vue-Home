@@ -1,7 +1,5 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production'
-  ? '/Vue-Home/dist'
-  : '/',
+  publicPath: 'dist',
   css: {
     sourceMap: true,
     modules: true
