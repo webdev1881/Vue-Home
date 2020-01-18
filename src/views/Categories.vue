@@ -63,11 +63,15 @@ export default {
 
 <style lang="scss" >
 
-#name {
-  margin: 0;
-}
-.input-field {
-  margin-top: 15px;
-}
+  h5 {
+      margin-bottom: 25px;
+    }
+
+  #name {
+    margin: 0;
+  }
+  .input-field {
+    margin-top: 15px;
+  }
 
 </style>

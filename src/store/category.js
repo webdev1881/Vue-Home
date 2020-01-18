@@ -12,11 +12,22 @@ export default {
         throw e
       }
     },
+
     async updateCategory({commit, dispatch}, {title, id, descript}) {
       try {
         const uid = await dispatch('getId')
         //console.log({title, descript, id});
         await firebase.database().ref(`/users/${uid}/categories`).child(id).update({title, descript})
+      } catch (e) {
+        commit('setError', e)
+        throw e
+      }
+    },
+    async updateCategories({commit, dispatch}, categories) {
+      try {
+        const uid = await dispatch('getId')
+        //console.log({title, descript, id});
+        await firebase.database().ref(`/users/${uid}/categories`).update(categories).set()
       } catch (e) {
         commit('setError', e)
         throw e

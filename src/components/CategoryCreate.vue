@@ -2,7 +2,7 @@
   <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>Создать</h4>
+        <h5>Создать</h5>
       </div>
 
       <form @submit.prevent="submitHandler">
@@ -54,7 +54,8 @@ export default {
     title: {required},
   },
   mounted() {
-    M.updateTextFields()
+    setTimeout( () => M.updateTextFields() )
+  //  M.updateTextFields()
   },
   methods: {
     async submitHandler() {        

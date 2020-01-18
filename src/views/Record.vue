@@ -107,13 +107,9 @@ export default {
       setTimeout( () => {
         this.select =  M.FormSelect.init(this.$refs.select)
         M.updateTextFields()
-        this.$refs.select.focus()
-      },0 )
-
-      
-      
-      
-      
+        this.$refs.select ? this.$refs.select.focus() : null
+        
+      },0 ) 
   },
 
   computed: {

@@ -9,7 +9,7 @@
             v-for="cur of curencies"
             :key="cur"
             class="currency-line">
-            <span> {{ getCur(cur) | cur(cur)   }} <hr> </span>
+            <span> {{ getCur(cur)  | cur(cur)   }} <hr> </span>
             
           </p>
 
@@ -24,7 +24,7 @@
 export default {
   props: ['rates'],
   data: () => ({
-  //  bill: '',
+    bill: '',
     curencies: ["UAH", "USD", "EUR"]
   }),
   computed: {
@@ -37,15 +37,15 @@ export default {
       return Math.floor(this.base/(this.rates[currency] || 1 ) )
     }
   },
-  mounted() {
-    //this.bill = this.$store.getters.info.bill
+  async mounted() {
+    //this.bill = await this.$store.getters.info.bill
     // this.curencies = [
     //   +this.bill,
     //   Math.floor(+this.bill/+this.rates.USD),
     //   Math.floor(+this.bill/+this.rates.EUR),
     // ]
     // Object.keys(this.curencies)
-    // console.log( this.rates )
+    //console.log( this.base )
   }
 }
 </script>

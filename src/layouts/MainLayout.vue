@@ -64,10 +64,15 @@ export default {
 .app-main-layout {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+//  height: 100vh;
   .main {
-    flex-grow: 1;
     display: flex;
+    height: 93vh;
+    // position: fixed;
+    // right: 0;
+    // left: 0;
+    // top: 60px;
+    // bottom: 0;
   }
 
   .app-content {
@@ -78,7 +83,7 @@ export default {
 
 .mob {
   position: absolute;
-  top: 62px;
+  top: 63px;
   bottom: 0;
   background-color: #e8ebf9;
   z-index: 2;

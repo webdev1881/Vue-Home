@@ -196,6 +196,9 @@ export default {
   min-width: 340px;
   background-color: #fff;
   padding: 1em;
+  .title {
+    font-size: 25px;
+  }
   .btn {
     width: 100%;
     margin-bottom: 5px;

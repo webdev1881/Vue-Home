@@ -2,7 +2,7 @@
   <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>Редактировать</h4>
+        <h5>Редактировать</h5>
       </div>
 
       <form @submit.prevent="submitHandler"> 
@@ -124,7 +124,8 @@ export default {
   },
   async mounted() {
     this.select = M.FormSelect.init(this.$refs.select)
-     await M.updateTextFields()
+    setTimeout( () => M.updateTextFields() )
+    // await M.updateTextFields()
   },
   destroyed() {
     if (this.select && this.select.destroy) {
@@ -135,6 +136,10 @@ export default {
 </script>
 
 <style lang="scss">
+
+  h5 {
+    margin-bottom: 25px;
+  }
 
   .input-field {
     margin: 0;

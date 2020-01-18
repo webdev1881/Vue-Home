@@ -60,6 +60,9 @@ export default {
 
 
 <style lang="scss" scoped>
+.btn {
+  min-width: 45px;
+}
 .cur-title {
   display: flex;
   align-items: center;

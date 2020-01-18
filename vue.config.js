@@ -1,7 +1,7 @@
-module.exports = {
-  publicPath: 'dist',
-  css: {
-    sourceMap: true,
-    modules: true
-  }
-}
+// module.exports = {
+//   publicPath: 'dist',
+//   css: {
+//     sourceMap: true,
+//     modules: true
+//   }
+// }

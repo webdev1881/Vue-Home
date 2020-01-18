@@ -38,11 +38,11 @@ export default {
 } 
 
 .app-sidenav {
-  margin-left: -300px;
+  margin-left: -180px;
   padding-top: 5px ;
   margin-top: 0;
   margin-bottom: 0;
-  width: 300px;
+  width: 180px;
   font-size: 1.4em;
   transition: all .4s;
   border-right: solid gray 1px;
