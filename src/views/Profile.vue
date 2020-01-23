@@ -10,7 +10,7 @@
         <label for="description">Имя</label>
       </div>
 
-      <button @click.prevent="onPhone" class="btn waves-effect waves-light" type="submit">
+      <button @click.prevent="onSubmit" class="btn waves-effect waves-light" type="submit">
         Обновить
         <i class="material-icons right">send</i>
       </button>
@@ -52,13 +52,11 @@ export default {
   },
   methods: {
 
-    async onPhone() {
+    async onSubmit() {
       await this.$store.dispatch('updateCategories', this.categories)
-      console.log(this.categories); 
     },
     checkMove: function(e) {
-      window.console.log("Future index: " + e.draggedContext.futureIndex);
-        
+      window.console.log("Future index: " + e.draggedContext.futureIndex);        
     }
   },
 

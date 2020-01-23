@@ -16,9 +16,7 @@ export default {
   },
   watch: {
     error( erFB ) {
-      console.log( erFB.code )
-      this.$error( messages[erFB.code] )
-    //  debugger
+      this.$error( messages[erFB.code] || "Что то пошло не так" )
       }
     }
   }

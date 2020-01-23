@@ -26,8 +26,20 @@ export default {
     async updateCategories({commit, dispatch}, categories) {
       try {
         const uid = await dispatch('getId')
-        //console.log({title, descript, id});
-        await firebase.database().ref(`/users/${uid}/categories`).update(categories).set()
+
+        console.log( firebase.database().ref(`/users/${uid}/categories`) );
+        
+
+        await firebase.database().ref(`/users/${uid}/categories`).remove()
+        
+        categories.forEach( async (item, i, arr)=> {        
+          let title = item.title;
+          let descript = item.descript
+          
+          await firebase.database().ref(`/users/${uid}/categories`).push({title, descript})          
+        } )
+      //  console.log( categories );
+      //  await firebase.database().ref(`/users/${uid}/categories`).update(categories).set()
       } catch (e) {
         commit('setError', e)
         throw e

@@ -123,8 +123,13 @@ export default {
     }
   },
   mounted() {
-    let msgz = this.$route.query.message;
-    msgz ? this.$message(messages[msgz]) : null;
+    if (messages[this.$route.query.message]) {
+      
+      this.$message(messages[this.$route.query.message])
+    //  console.log(this.$message);
+      
+      
+    }
   },
   computed: {
     // isFormEnable: function() {
@@ -149,8 +154,11 @@ export default {
         password: this.user.password
       };
       try {
+               
         await this.$store.dispatch("login", formData);
-        this.$router.push("/");
+        this.$router.push("/"); 
+      //  debugger
+        
       } catch (e) {}
     },
     async onGoogle() {
@@ -180,11 +188,13 @@ export default {
       }
     }
   },
-
   beforeDestroy() {
-    this.msg = null;
+    console.log(this.$message);
+    M.Toast.dismissAll()
   }
+
 };
+
 </script>
 
 

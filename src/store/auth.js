@@ -6,6 +6,7 @@ export default {
         async login({ dispatch, commit }, { email, password }) {
             try {
                 await firebase.auth().signInWithEmailAndPassword(email, password)
+                commit('clearInfo')
             } catch (e) {
                 commit( 'setError', e )
                 throw e
@@ -64,16 +65,17 @@ export default {
         },
 
         async logout({commit}) {
-            await firebase.auth().signOut()
-            commit('clearInfo')
+            await firebase.auth().signOut()   
+            commit('clearInfo')         
         },
 
-        async register({ dispatch }, { email, password, name }) {
+        async register({ dispatch, commit }, { email, password, name }) {
             try {
                 await firebase.auth().createUserWithEmailAndPassword(email, password)
                 const id = await dispatch('getId')
                 await firebase.database().ref(`/users/${id}/info`).set({ name, bill: 0})
             } catch (e) {
+                commit( 'setError', e )
                 throw e
             }
         },

@@ -9,7 +9,7 @@
 
     <a 
       class='dropdown-trigger drop'
-      href='#' data-target='dropdown'
+      data-target='dropdown'
       ref='dropd' 
       >
       {{name}}
@@ -28,7 +28,7 @@
 
 <script>
 
-  import { interval } from 'rxjs'
+//  import { materialize } from '../..main/'
 
   export default {
     data: () => ({
@@ -38,9 +38,9 @@
     }),
 
     methods: {
-      async logout() {       
+      async logout() {     
         await this.$store.dispatch('logout')
-        this.$router.push('/login?message=logout') 
+        this.$router.push('/login?message=logout')
       }
     },
     computed: {
@@ -49,18 +49,20 @@
       }
     },
     mounted() {
-      this.interval =  interval(1000).subscribe( () => this.date = new Date()  )
-      setTimeout( () => {
-        this.dropdown = M.Dropdown.init(this.$refs.dropd, {constrainWidth: true}) 
-      },0 )
-           
+      this.interval = setInterval(() => {
+      this.date = new Date()
+    }, 1000)
+      this.dropdown = M.Dropdown.init(this.$refs.dropd, {
+      constrainWidth: false
+    })   
     },
 
     beforeDestroy() {
-      this.interval.unsubscribe();
+      M.Toast.dismissAll()
+      clearInterval(this.interval)
       if (this.dropdown && this.dropdown.destroy) {
-      this.dropdown.destroy()
-      }
+      this.dropdown.destroy()      }
+      
     }
   }
 </script>
@@ -72,7 +74,8 @@
     width: 100%;
     background-color: #609ca9;
     justify-content: space-between;
-    height: 60px;
+    min-height: 60px;
+    height: 7vh;
     display: flex;
     align-items: center;
     padding: 0 20px 0 20px;

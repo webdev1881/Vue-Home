@@ -9,7 +9,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database'
 
-import  "materialize-css/dist/js/materialize.min"
+import materialize from  "materialize-css/dist/js/materialize.min"
 import Slicksort from 'vue-slicksort';
 
 import dateFilter from './filters/date.filter'
@@ -21,6 +21,7 @@ import VModal from 'vue-js-modal'
 
 import Loader from '@/components/app/Loader'
 
+Vue.use(materialize)
 Vue.use(VModal)
 Vue.use(Vuelidate);
 Vue.use(messagePlugin);

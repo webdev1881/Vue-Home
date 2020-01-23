@@ -1,5 +1,7 @@
 <template>
-  <div class="app-main-layout">
+<div>
+  <Loader v-if="loading"/>
+  <div v-else class="app-main-layout">
     <Navbar @tagSide="isOpen = !isOpen" />
 
     <div class="main" @click="hideMobile">
@@ -19,17 +21,20 @@
       </router-link>
     </div>
   </div>
+</div>
 </template>
 
 <script>
 import Navbar from "@/components/app/Navbar";
 import Sidebar from "@/components/app/Sidebar";
+import messages from '@/utils/messages'
 
 export default {
   name: "main-layout",
   data: () => ({
     isOpen: Boolean,
-    isMobile: Boolean
+    isMobile: Boolean,
+    loading: true
   }),
 
   async mounted() {
@@ -40,9 +45,13 @@ export default {
       this.isOpen = true;
       this.isMobile = false;
     }
-    if (!Object.keys(this.$store.getters.info).length) {
-      await this.$store.dispatch("fetchinfo");
+    if (!this.$store.getters.info.bill || !this.$store.getters.info.name) {
+      await this.$store.dispatch('fetchinfo')
+      this.loading = false
     }
+    
+
+
   },
 
   methods: {
@@ -52,6 +61,17 @@ export default {
       }
     }
   },
+  computed: {
+    error() {
+      return this.$store.getters.error
+    }
+  },
+  watch: {
+    error( erFB ) {
+      this.$error( messages[erFB.code] || "Что то пошло не так" )
+      }
+    },
+  
 
   components: {
     Navbar,
@@ -60,14 +80,16 @@ export default {
 };
 </script>
 
+
 <style lang="scss" scoped>
+
 .app-main-layout {
   display: flex;
   flex-direction: column;
 //  height: 100vh;
   .main {
     display: flex;
-    height: 93vh;
+    height: 92vh;
     // position: fixed;
     // right: 0;
     // left: 0;
