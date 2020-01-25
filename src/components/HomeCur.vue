@@ -9,23 +9,24 @@
           <thead>
             <tr>
               <th>Валюта</th>
-              <th>Курс</th>
-              <th>Дата</th>
+              <th>Покупка</th>
+              <th>Продажа</th>
             </tr>
           </thead>
 
           <tbody>
             <tr>
               <td>USD</td>
-              <td> {{rates.USD}} </td>
-              <td>{{date | date}}</td>
+              <td> {{ rates.USD.buy }} </td>
+              <td> {{ rates.USD.sale }} </td>
             </tr>
             <tr>
               <td>EUR</td>
-              <td> {{rates.EUR}} </td>
-              <td>{{date | date}}</td>
+              <td> {{ rates.EUR.buy }} </td>
+              <td> {{ rates.EUR.sale }} </td>
             </tr>
           </tbody>
+          
         </table>
       </div>
     </div>

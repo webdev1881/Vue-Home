@@ -1,4 +1,5 @@
 <template>
+
   <div>
     <div class="cur-title">
       <div class="cur-name">Счет</div>
@@ -20,6 +21,7 @@
 
 
   </div>
+
 </template>
 
 <script>
@@ -34,16 +36,24 @@ export default {
     USD: '',
     EUR: '',
     isLoading: true,
-    cur: {},
+   cur: {},
     currencies: null,
   }),
   async mounted() {
-    this.currencies = await this.$store.dispatch('fetchCur')
+    this.currencies = await this.$store.dispatch('fetchCur')    
     this.cur = {
-      USD: this.currencies[26].rate.toFixed(2),
-      EUR: this.currencies[33].rate.toFixed(2)
-    }
+      USD: {
+        "buy": (+this.currencies[0].buy).toFixed(2),
+        "sale": (+this.currencies[0].sale).toFixed(2)
+      },
+      EUR: {
+        "buy": (+this.currencies[1].buy).toFixed(2),
+        "sale": (+this.currencies[1].sale).toFixed(2)
+      }
+    }    
+
     this.isLoading = false
+
   },
   methods: {
     async refresh() {
@@ -60,6 +70,7 @@ export default {
 
 
 <style lang="scss" scoped>
+
 .btn {
   min-width: 45px;
 }
