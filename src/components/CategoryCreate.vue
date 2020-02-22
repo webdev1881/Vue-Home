@@ -55,7 +55,6 @@ export default {
   },
   mounted() {
     setTimeout( () => M.updateTextFields() )
-  //  M.updateTextFields()
   },
   methods: {
     async submitHandler() {        

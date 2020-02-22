@@ -90,6 +90,7 @@ export default {
     select: null,
     categories: [],
     category: null,
+    categoryName: null,
     type: 'outcome',
     amount: null,
     description: ''
@@ -101,15 +102,18 @@ export default {
     this.categories = await this.$store.dispatch('fetchCategories')
     this.loading = false
 
-    if (this.categories.length) {
+    if (this.categories.length) { 
       this.category = this.categories[0].id
+      this.categoryName = this.categories[0].title
     }
-      setTimeout( () => {
-        this.select =  M.FormSelect.init(this.$refs.select)
-        M.updateTextFields()
-        this.$refs.select ? this.$refs.select.focus() : null
-        
-      },0 ) 
+    setTimeout( () => {
+      this.select =  M.FormSelect.init(this.$refs.select)
+      M.updateTextFields()
+      this.$refs.select ? this.$refs.select.focus() : null
+      
+    },0 ) 
+    //  console.log(this.category);
+      
   },
 
   computed: {
@@ -132,7 +136,8 @@ export default {
       if (this.canCreateRecord) {
         try {
           await this.$store.dispatch('createRecord', {
-            categoryId: this.category,
+            //category: this.category,
+            categoryName: this.categoryName,
             amount: this.amount,
             description: this.description,
             type: this.type,

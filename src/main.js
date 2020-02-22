@@ -9,11 +9,12 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database'
 
-import materialize from  "materialize-css/dist/js/materialize.min"
+
 import Slicksort from 'vue-slicksort';
 
 import dateFilter from './filters/date.filter'
 import curFilter from './filters/cur.filter'
+
 
 import messagePlugin from './utils/message.plugin'
 
@@ -21,7 +22,9 @@ import VModal from 'vue-js-modal'
 
 import Loader from '@/components/app/Loader'
 
-Vue.use(materialize)
+import materialize from  "materialize-css/dist/js/materialize.min"
+
+
 Vue.use(VModal)
 Vue.use(Vuelidate);
 Vue.use(messagePlugin);
@@ -29,7 +32,7 @@ Vue.filter('date', dateFilter);
 Vue.filter('cur', curFilter);
 Vue.component('Loader', Loader);
 Vue.component('Slicksort', Slicksort);
-
+Vue.use(materialize)
 
 
 firebase.initializeApp(

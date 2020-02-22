@@ -71,6 +71,10 @@ export default {
       this.$error( messages[erFB.code] || "Что то пошло не так" )
       }
     },
+
+  beforeDestroy() {
+    M.Toast.dismissAll()  
+  },
   
 
   components: {

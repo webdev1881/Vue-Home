@@ -1,4 +1,6 @@
 <template>
+
+
   <div class="login">
     <div class="title">Система учета</div>
     <div class="row">
@@ -92,6 +94,8 @@
       hello, world!
     </modal>
   </div>
+
+
 </template>
 
 
@@ -123,21 +127,13 @@ export default {
     }
   },
   mounted() {
-    if (messages[this.$route.query.message]) {
-      
-      this.$message(messages[this.$route.query.message])
-    //  console.log(this.$message);
-      
-      
+  //  console.log(this.$message );
+    
+    if (messages[this.$route.query.message]) {     
+      this.$message(messages[this.$route.query.message])     
     }
   },
   computed: {
-    // isFormEnable: function() {
-    //   if (!this.$v.$invalid) {
-    //   return  false
-    //   }
-    //   return true
-    // }
   },
   methods: {
     show () {
@@ -189,8 +185,9 @@ export default {
     }
   },
   beforeDestroy() {
-    console.log(this.$message);
     M.Toast.dismissAll()
+    console.log(this.$message )
+    
   }
 
 };
